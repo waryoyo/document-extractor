@@ -1,0 +1,7 @@
+fastapi
+pydantic
+pypdf
+python-docx
+python-pptx
+phonenumbers
+PyMuPDF
