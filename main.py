@@ -4,7 +4,6 @@ from docx import Document
 from pptx import Presentation
 from pydantic import BaseModel
 from pypdf import PdfReader
-import phonenumbers
 import fitz
 import re
 
@@ -82,18 +81,6 @@ async def extract_text_from_file(file: UploadFile = File(...)):
         return {"text": text}
     else:
         return {"error": "File type not supported"}
-
-
-class PhoneNumberRequest(BaseModel):
-    phone_number: str
-
-
-@app.post("/normalize-phone-number")
-async def normalize_phone_number(request: PhoneNumberRequest):
-    phone_number = request.phone_number
-    parsed_number = phonenumbers.parse(phone_number)
-    formatted_number = f"+{parsed_number.country_code}{parsed_number.national_number}"
-    return {"phone_number": formatted_number}
 
 
 if __name__ == "__main__":
